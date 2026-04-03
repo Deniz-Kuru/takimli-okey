@@ -93,6 +93,8 @@ TILE_COLLISION_MIN_OVERLAP_RATIO = 0.08
 TILE_COLLISION_CHAIN_MAX_STEPS = 40
 # Grace time (ms) to keep contact mode active when left/right are not released simultaneously.
 DRAG_CONTACT_GRACE_MS = 180
+# Right-click contact mode only activates when dragged tile is near board.
+RIGHT_CLICK_BOARD_VICINITY_PX = 50
 
 # Outside/fall behavior
 # Affects how many pixels earlier right-side push-out fall starts (left side unchanged).
