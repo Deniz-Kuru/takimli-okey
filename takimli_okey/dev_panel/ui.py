@@ -215,7 +215,7 @@ class DevPanel:
 
         return None, None, False, False, False
 
-    def draw(self, mouse_pos: tuple[int, int]) -> pygame.Surface:
+    def draw(self, mouse_pos: tuple[int, int], fall_debug: dict[str, str] | None = None) -> pygame.Surface:
         """Render the dev panel and return the surface."""
         self.surface.fill(DEV_PANEL_BG_COLOR)
         pygame.draw.rect(self.surface, DEV_PANEL_BORDER_COLOR,
@@ -391,5 +391,26 @@ class DevPanel:
             "Reload Game", True, DEV_PANEL_TEXT_COLOR)
         self.surface.blit(reload_label, reload_label.get_rect(
             center=reload_button.center))
+
+        # Last held tile fall/acceleration debug section.
+        debug_title_y = reload_button.bottom + 14
+        debug_title = self.font_hud.render(
+            "Last Held Tile", True, DEV_PANEL_TEXT_COLOR)
+        self.surface.blit(debug_title, (DEV_PANEL_PADDING, debug_title_y))
+
+        if fall_debug is None:
+            fall_debug = {
+                "Tile": "-",
+                "Falling": "no",
+                "Velocity": "0.00 px/f",
+                "Accel": "0.00 px/f^2",
+            }
+
+        line_y = debug_title_y + 24
+        for label, value in fall_debug.items():
+            line = self.font_hud.render(
+                f"{label}: {value}", True, DEV_PANEL_TEXT_COLOR)
+            self.surface.blit(line, (DEV_PANEL_PADDING, line_y))
+            line_y += 20
 
         return self.surface

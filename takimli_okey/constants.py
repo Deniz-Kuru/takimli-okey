@@ -3,11 +3,11 @@
 from pathlib import Path
 
 # Affects the size of the main game window in pixels (game window only, not including dev panel).
-WINDOW_W, WINDOW_H = 1100, 750
+WINDOW_W, WINDOW_H = 1300, 750
 
 # Game area (the green felt zone where cards "live")
 # Affects the top-left position of the table/game area.
-GAME_AREA_X, GAME_AREA_Y = 50, 150
+GAME_AREA_X, GAME_AREA_Y = 150, 150
 # Affects the width/height of the table/game area rectangle.
 GAME_AREA_W, GAME_AREA_H = 1000, 500
 
@@ -50,13 +50,15 @@ BOARD_BOTTOM_TIER_RIGHT_PADDING = 45
 
 # Two inclined lanes where tiles snap vertically
 # Affects Y position of the first inclined snap lane on the board.
-BOARD_LANE_BASE_OFFSET_Y = 40
+BOARD_LANE_BASE_OFFSET_Y = 47
 # Affects vertical distance between the two snap lanes.
-BOARD_LANE_SPACING_Y = 90
+BOARD_LANE_SPACING_Y = 83
 # Affects incline amount of both lanes (Y change per pixel of X).
 BOARD_LANE_SLOPE_PER_PX = 0.035
+# Affects max horizontal distance from board side where auto-snap is allowed.
+BOARD_SNAP_MAX_DIST_X_PX = 50
 # Affects max vertical distance from a lane center where auto-snap is allowed.
-BOARD_SNAP_MAX_DIST_PX = 25
+BOARD_SNAP_MAX_DIST_Y_PX = 50
 
 # Perspective / depth control point
 # Affects the X coordinate that back-layer offsets are pulled toward.
@@ -67,6 +69,8 @@ VANISHING_POINT_Y = GAME_AREA_Y + (GAME_AREA_H // 2)
 # Visual tuning for two-layer tile rendering
 # Affects max offset distance of the back layer toward board center.
 TILE_BACK_OFFSET_MAX_PX = 10
+# Affects visual size multiplier while tile is in hover drag mode.
+TILE_HOVER_SCALE = 1.06
 # Affects darkness of the back tile layer (0 transparent, 255 black overlay).
 TILE_BACK_SHADE_ALPHA = 0
 # How strongly the tile color is tinted onto the tile image (0 = none, 255 = solid)
@@ -79,6 +83,26 @@ DRAG_OUTLINE_THICKNESS = 3
 
 # Number placement and style
 TILE_NUMBER_MARGIN = 4  # Affects padding of number text from tile edges.
+
+# Drag collision tuning
+# Extra spacing maintained between tile fronts after collision resolution.
+TILE_COLLISION_GAP_PX = 0
+# Minimum overlap ratio required before push logic activates.
+TILE_COLLISION_MIN_OVERLAP_RATIO = 0.08
+# Max propagation steps when resolving push chain collisions.
+TILE_COLLISION_CHAIN_MAX_STEPS = 40
+# Grace time (ms) to keep contact mode active when left/right are not released simultaneously.
+DRAG_CONTACT_GRACE_MS = 180
+
+# Outside/fall behavior
+# Affects how many pixels earlier right-side push-out fall starts (left side unchanged).
+BOARD_RIGHT_EARLY_FALL_TRIGGER_PX = 25
+# Affects starting downward speed when a tile begins falling outside.
+TILE_FALL_INITIAL_SPEED_PX_PER_FRAME = 1.5
+# Affects per-frame increase in downward speed while falling.
+TILE_FALL_ACCEL_PX_PER_FRAME2 = 2
+# Affects max downward speed reached during outside fall.
+TILE_FALL_MAX_SPEED_PX_PER_FRAME = 50.0
 
 # Colors
 BG_COLOR = (30, 30, 30)  # Affects overall window background color.
